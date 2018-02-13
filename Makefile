@@ -22,9 +22,9 @@ CFLAGS = -DCONFIG_LOGLEVEL=4 -g -Wall $(INCLUDES)
 
 LDLIBS = -lfpga_mgmt -lrt -lpthread
 
-SRC = test_hello_world_vhdl.c
+SRC = nano_fpga.c
 OBJ = $(SRC:.c=.o)
-BIN = test_hello_world_vhdl
+BIN = nano_fpga
 
 all: $(BIN) check_env
 

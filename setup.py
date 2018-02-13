@@ -8,7 +8,9 @@ from distutils.extension import Extension
 ext_modules=[
     Extension("fpga_interface",
               sources=["fpga_interface.pyx",'nano_fpga.c'],
-              include_dirs=["{}/userspace/include".format(os.environ['SDK_DIR'])]
+              include_dirs=["{}/userspace/include".format(os.environ['SDK_DIR'])],
+              libraries=["fpga_mgmt"],
+              define_macros=[("CONFIG_LOGLEVEL", 4)]
     )
 ]
 

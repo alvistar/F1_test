@@ -3,7 +3,19 @@
 /* BEGIN: Cython Metadata
 {
     "distutils": {
+        "define_macros": [
+            [
+                "CONFIG_LOGLEVEL",
+                4
+            ]
+        ],
         "depends": [],
+        "include_dirs": [
+            "/home/alvistar/aws-fpga/sdk/userspace/include"
+        ],
+        "libraries": [
+            "fpga_mgmt"
+        ],
         "name": "fpga_interface",
         "sources": [
             "fpga_interface.pyx",
@@ -1047,15 +1059,8 @@ static CYTHON_INLINE int resize_smart(arrayobject *self, Py_ssize_t n) {
 }
 #endif
 
-/* Print.proto */
-static int __Pyx_Print(PyObject*, PyObject *, int);
-#if CYTHON_COMPILING_IN_PYPY || PY_MAJOR_VERSION >= 3
-static PyObject* __pyx_print = 0;
-static PyObject* __pyx_print_kwargs = 0;
-#endif
-
-/* PrintOne.proto */
-static int __Pyx_PrintOne(PyObject* stream, PyObject *o);
+/* CIntToPy.proto */
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value);
 
 /* CIntToPy.proto */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value);
@@ -1194,6 +1199,7 @@ static CYTHON_INLINE int __pyx_f_7cpython_5array_extend_buffer(arrayobject *, ch
 
 /* Module declarations from 'fpga_interface' */
 __PYX_EXTERN_C DL_IMPORT(int) pow_(uint8_t *, uint8_t *); /*proto*/
+__PYX_EXTERN_C DL_IMPORT(int) init(void); /*proto*/
 #define __Pyx_MODULE_NAME "fpga_interface"
 extern int __pyx_module_is_main_fpga_interface;
 int __pyx_module_is_main_fpga_interface = 0;
@@ -1203,15 +1209,13 @@ static PyObject *__pyx_builtin_MemoryError;
 static const char __pyx_k_B[] = "B";
 static const char __pyx_k_a[] = "a";
 static const char __pyx_k_b[] = "b";
-static const char __pyx_k_end[] = "end";
-static const char __pyx_k_file[] = "file";
 static const char __pyx_k_hash[] = "hash";
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_test[] = "__test__";
-static const char __pyx_k_print[] = "print";
 static const char __pyx_k_do_pow[] = "do_pow";
 static const char __pyx_k_hash_b[] = "hash_b";
 static const char __pyx_k_fromhex[] = "fromhex";
+static const char __pyx_k_init_fpga[] = "init_fpga";
 static const char __pyx_k_MemoryError[] = "MemoryError";
 static const char __pyx_k_fpga_interface[] = "fpga_interface";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
@@ -1223,25 +1227,86 @@ static PyObject *__pyx_n_s_a;
 static PyObject *__pyx_n_s_b;
 static PyObject *__pyx_n_s_cline_in_traceback;
 static PyObject *__pyx_n_s_do_pow;
-static PyObject *__pyx_n_s_end;
-static PyObject *__pyx_n_s_file;
 static PyObject *__pyx_n_s_fpga_interface;
 static PyObject *__pyx_kp_s_fpga_interface_pyx;
 static PyObject *__pyx_n_s_fromhex;
 static PyObject *__pyx_n_s_hash;
 static PyObject *__pyx_n_s_hash_b;
+static PyObject *__pyx_n_s_init_fpga;
 static PyObject *__pyx_n_s_int_array_template;
 static PyObject *__pyx_n_s_main;
-static PyObject *__pyx_n_s_print;
 static PyObject *__pyx_n_s_test;
-static PyObject *__pyx_pf_14fpga_interface_do_pow(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_hash); /* proto */
+static PyObject *__pyx_pf_14fpga_interface_init_fpga(CYTHON_UNUSED PyObject *__pyx_self); /* proto */
+static PyObject *__pyx_pf_14fpga_interface_2do_pow(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_hash); /* proto */
 static int __pyx_pf_7cpython_5array_5array___getbuffer__(arrayobject *__pyx_v_self, Py_buffer *__pyx_v_info, CYTHON_UNUSED int __pyx_v_flags); /* proto */
 static void __pyx_pf_7cpython_5array_5array_2__releasebuffer__(CYTHON_UNUSED arrayobject *__pyx_v_self, Py_buffer *__pyx_v_info); /* proto */
-static PyObject *__pyx_tuple_;
-static PyObject *__pyx_codeobj__2;
+static PyObject *__pyx_codeobj_;
+static PyObject *__pyx_tuple__2;
+static PyObject *__pyx_codeobj__3;
 
-/* "fpga_interface.pyx":7
- * cdef extern int pow_( uint8_t *pin, uint8_t *pout );
+/* "fpga_interface.pyx":8
+ * cdef extern int init();
+ * 
+ * def init_fpga():             # <<<<<<<<<<<<<<
+ *   return init()
+ * 
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_14fpga_interface_1init_fpga(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused); /*proto*/
+static PyMethodDef __pyx_mdef_14fpga_interface_1init_fpga = {"init_fpga", (PyCFunction)__pyx_pw_14fpga_interface_1init_fpga, METH_NOARGS, 0};
+static PyObject *__pyx_pw_14fpga_interface_1init_fpga(PyObject *__pyx_self, CYTHON_UNUSED PyObject *unused) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("init_fpga (wrapper)", 0);
+  __pyx_r = __pyx_pf_14fpga_interface_init_fpga(__pyx_self);
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_14fpga_interface_init_fpga(CYTHON_UNUSED PyObject *__pyx_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  __Pyx_RefNannySetupContext("init_fpga", 0);
+
+  /* "fpga_interface.pyx":9
+ * 
+ * def init_fpga():
+ *   return init()             # <<<<<<<<<<<<<<
+ * 
+ * def do_pow(hash):
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_1 = __Pyx_PyInt_From_int(init()); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 9, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* "fpga_interface.pyx":8
+ * cdef extern int init();
+ * 
+ * def init_fpga():             # <<<<<<<<<<<<<<
+ *   return init()
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_AddTraceback("fpga_interface.init_fpga", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "fpga_interface.pyx":11
+ *   return init()
  * 
  * def do_pow(hash):             # <<<<<<<<<<<<<<
  *   hash_b = bytes.fromhex(hash)
@@ -1249,20 +1314,20 @@ static PyObject *__pyx_codeobj__2;
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_14fpga_interface_1do_pow(PyObject *__pyx_self, PyObject *__pyx_v_hash); /*proto*/
-static PyMethodDef __pyx_mdef_14fpga_interface_1do_pow = {"do_pow", (PyCFunction)__pyx_pw_14fpga_interface_1do_pow, METH_O, 0};
-static PyObject *__pyx_pw_14fpga_interface_1do_pow(PyObject *__pyx_self, PyObject *__pyx_v_hash) {
+static PyObject *__pyx_pw_14fpga_interface_3do_pow(PyObject *__pyx_self, PyObject *__pyx_v_hash); /*proto*/
+static PyMethodDef __pyx_mdef_14fpga_interface_3do_pow = {"do_pow", (PyCFunction)__pyx_pw_14fpga_interface_3do_pow, METH_O, 0};
+static PyObject *__pyx_pw_14fpga_interface_3do_pow(PyObject *__pyx_self, PyObject *__pyx_v_hash) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("do_pow (wrapper)", 0);
-  __pyx_r = __pyx_pf_14fpga_interface_do_pow(__pyx_self, ((PyObject *)__pyx_v_hash));
+  __pyx_r = __pyx_pf_14fpga_interface_2do_pow(__pyx_self, ((PyObject *)__pyx_v_hash));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_14fpga_interface_do_pow(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_hash) {
+static PyObject *__pyx_pf_14fpga_interface_2do_pow(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_hash) {
   PyObject *__pyx_v_hash_b = NULL;
   arrayobject *__pyx_v_a = 0;
   arrayobject *__pyx_v_int_array_template = 0;
@@ -1275,14 +1340,14 @@ static PyObject *__pyx_pf_14fpga_interface_do_pow(CYTHON_UNUSED PyObject *__pyx_
   PyObject *__pyx_t_4 = NULL;
   __Pyx_RefNannySetupContext("do_pow", 0);
 
-  /* "fpga_interface.pyx":8
+  /* "fpga_interface.pyx":12
  * 
  * def do_pow(hash):
  *   hash_b = bytes.fromhex(hash)             # <<<<<<<<<<<<<<
  *   cdef array.array a = array.array('B', hash_b)
  *   cdef array.array int_array_template = array.array('B', [])
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)(&PyBytes_Type)), __pyx_n_s_fromhex); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 8, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(((PyObject *)(&PyBytes_Type)), __pyx_n_s_fromhex); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 12, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_2))) {
@@ -1295,13 +1360,13 @@ static PyObject *__pyx_pf_14fpga_interface_do_pow(CYTHON_UNUSED PyObject *__pyx_
     }
   }
   if (!__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_hash); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 8, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_hash); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 12, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   } else {
     #if CYTHON_FAST_PYCALL
     if (PyFunction_Check(__pyx_t_2)) {
       PyObject *__pyx_temp[2] = {__pyx_t_3, __pyx_v_hash};
-      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 8, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 12, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else
@@ -1309,19 +1374,19 @@ static PyObject *__pyx_pf_14fpga_interface_do_pow(CYTHON_UNUSED PyObject *__pyx_
     #if CYTHON_FAST_PYCCALL
     if (__Pyx_PyFastCFunction_Check(__pyx_t_2)) {
       PyObject *__pyx_temp[2] = {__pyx_t_3, __pyx_v_hash};
-      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 8, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyCFunction_FastCall(__pyx_t_2, __pyx_temp+1-1, 1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 12, __pyx_L1_error)
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else
     #endif
     {
-      __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 8, __pyx_L1_error)
+      __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 12, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3); __pyx_t_3 = NULL;
       __Pyx_INCREF(__pyx_v_hash);
       __Pyx_GIVEREF(__pyx_v_hash);
       PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_v_hash);
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 8, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 12, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     }
@@ -1330,14 +1395,14 @@ static PyObject *__pyx_pf_14fpga_interface_do_pow(CYTHON_UNUSED PyObject *__pyx_
   __pyx_v_hash_b = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "fpga_interface.pyx":9
+  /* "fpga_interface.pyx":13
  * def do_pow(hash):
  *   hash_b = bytes.fromhex(hash)
  *   cdef array.array a = array.array('B', hash_b)             # <<<<<<<<<<<<<<
  *   cdef array.array int_array_template = array.array('B', [])
  *   cdef array.array b
  */
-  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 9, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 13, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_n_s_B);
   __Pyx_GIVEREF(__pyx_n_s_B);
@@ -1345,22 +1410,22 @@ static PyObject *__pyx_pf_14fpga_interface_do_pow(CYTHON_UNUSED PyObject *__pyx_
   __Pyx_INCREF(__pyx_v_hash_b);
   __Pyx_GIVEREF(__pyx_v_hash_b);
   PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_v_hash_b);
-  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_7cpython_5array_array), __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 9, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_7cpython_5array_array), __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 13, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_a = ((arrayobject *)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "fpga_interface.pyx":10
+  /* "fpga_interface.pyx":14
  *   hash_b = bytes.fromhex(hash)
  *   cdef array.array a = array.array('B', hash_b)
  *   cdef array.array int_array_template = array.array('B', [])             # <<<<<<<<<<<<<<
  *   cdef array.array b
  * 
  */
-  __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 10, __pyx_L1_error)
+  __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 14, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 10, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 14, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_n_s_B);
   __Pyx_GIVEREF(__pyx_n_s_B);
@@ -1368,41 +1433,44 @@ static PyObject *__pyx_pf_14fpga_interface_do_pow(CYTHON_UNUSED PyObject *__pyx_
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_2);
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_7cpython_5array_array), __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 10, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_7cpython_5array_array), __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 14, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_int_array_template = ((arrayobject *)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "fpga_interface.pyx":13
+  /* "fpga_interface.pyx":17
  *   cdef array.array b
  * 
- *   b = array.clone(int_array_template, 3, zero=False)             # <<<<<<<<<<<<<<
+ *   b = array.clone(int_array_template, 20, zero=True)             # <<<<<<<<<<<<<<
  * 
  *   #cdef uint8_t[:] pin = a
  */
-  __pyx_t_2 = ((PyObject *)__pyx_f_7cpython_5array_clone(__pyx_v_int_array_template, 3, 0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 13, __pyx_L1_error)
+  __pyx_t_2 = ((PyObject *)__pyx_f_7cpython_5array_clone(__pyx_v_int_array_template, 20, 1)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 17, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_v_b = ((arrayobject *)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "fpga_interface.pyx":17
+  /* "fpga_interface.pyx":21
  *   #cdef uint8_t[:] pin = a
  *   #pow(pin, pin)
  *   pow_(a.data.as_uchars, b.data.as_uchars)             # <<<<<<<<<<<<<<
- *   print(b)
+ *   return b
  */
   pow_(__pyx_v_a->data.as_uchars, __pyx_v_b->data.as_uchars);
 
-  /* "fpga_interface.pyx":18
+  /* "fpga_interface.pyx":22
  *   #pow(pin, pin)
  *   pow_(a.data.as_uchars, b.data.as_uchars)
- *   print(b)             # <<<<<<<<<<<<<<
+ *   return b             # <<<<<<<<<<<<<<
  */
-  if (__Pyx_PrintOne(0, ((PyObject *)__pyx_v_b)) < 0) __PYX_ERR(0, 18, __pyx_L1_error)
+  __Pyx_XDECREF(__pyx_r);
+  __Pyx_INCREF(((PyObject *)__pyx_v_b));
+  __pyx_r = ((PyObject *)__pyx_v_b);
+  goto __pyx_L0;
 
-  /* "fpga_interface.pyx":7
- * cdef extern int pow_( uint8_t *pin, uint8_t *pout );
+  /* "fpga_interface.pyx":11
+ *   return init()
  * 
  * def do_pow(hash):             # <<<<<<<<<<<<<<
  *   hash_b = bytes.fromhex(hash)
@@ -1410,8 +1478,6 @@ static PyObject *__pyx_pf_14fpga_interface_do_pow(CYTHON_UNUSED PyObject *__pyx_
  */
 
   /* function exit code */
-  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
-  goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
@@ -2106,16 +2172,14 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_b, __pyx_k_b, sizeof(__pyx_k_b), 0, 0, 1, 1},
   {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
   {&__pyx_n_s_do_pow, __pyx_k_do_pow, sizeof(__pyx_k_do_pow), 0, 0, 1, 1},
-  {&__pyx_n_s_end, __pyx_k_end, sizeof(__pyx_k_end), 0, 0, 1, 1},
-  {&__pyx_n_s_file, __pyx_k_file, sizeof(__pyx_k_file), 0, 0, 1, 1},
   {&__pyx_n_s_fpga_interface, __pyx_k_fpga_interface, sizeof(__pyx_k_fpga_interface), 0, 0, 1, 1},
   {&__pyx_kp_s_fpga_interface_pyx, __pyx_k_fpga_interface_pyx, sizeof(__pyx_k_fpga_interface_pyx), 0, 0, 1, 0},
   {&__pyx_n_s_fromhex, __pyx_k_fromhex, sizeof(__pyx_k_fromhex), 0, 0, 1, 1},
   {&__pyx_n_s_hash, __pyx_k_hash, sizeof(__pyx_k_hash), 0, 0, 1, 1},
   {&__pyx_n_s_hash_b, __pyx_k_hash_b, sizeof(__pyx_k_hash_b), 0, 0, 1, 1},
+  {&__pyx_n_s_init_fpga, __pyx_k_init_fpga, sizeof(__pyx_k_init_fpga), 0, 0, 1, 1},
   {&__pyx_n_s_int_array_template, __pyx_k_int_array_template, sizeof(__pyx_k_int_array_template), 0, 0, 1, 1},
   {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
-  {&__pyx_n_s_print, __pyx_k_print, sizeof(__pyx_k_print), 0, 0, 1, 1},
   {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
   {0, 0, 0, 0, 0, 0, 0}
 };
@@ -2130,17 +2194,26 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "fpga_interface.pyx":7
- * cdef extern int pow_( uint8_t *pin, uint8_t *pout );
+  /* "fpga_interface.pyx":8
+ * cdef extern int init();
+ * 
+ * def init_fpga():             # <<<<<<<<<<<<<<
+ *   return init()
+ * 
+ */
+  __pyx_codeobj_ = (PyObject*)__Pyx_PyCode_New(0, 0, 0, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_fpga_interface_pyx, __pyx_n_s_init_fpga, 8, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj_)) __PYX_ERR(0, 8, __pyx_L1_error)
+
+  /* "fpga_interface.pyx":11
+ *   return init()
  * 
  * def do_pow(hash):             # <<<<<<<<<<<<<<
  *   hash_b = bytes.fromhex(hash)
  *   cdef array.array a = array.array('B', hash_b)
  */
-  __pyx_tuple_ = PyTuple_Pack(5, __pyx_n_s_hash, __pyx_n_s_hash_b, __pyx_n_s_a, __pyx_n_s_int_array_template, __pyx_n_s_b); if (unlikely(!__pyx_tuple_)) __PYX_ERR(0, 7, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple_);
-  __Pyx_GIVEREF(__pyx_tuple_);
-  __pyx_codeobj__2 = (PyObject*)__Pyx_PyCode_New(1, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple_, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_fpga_interface_pyx, __pyx_n_s_do_pow, 7, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__2)) __PYX_ERR(0, 7, __pyx_L1_error)
+  __pyx_tuple__2 = PyTuple_Pack(5, __pyx_n_s_hash, __pyx_n_s_hash_b, __pyx_n_s_a, __pyx_n_s_int_array_template, __pyx_n_s_b); if (unlikely(!__pyx_tuple__2)) __PYX_ERR(0, 11, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__2);
+  __Pyx_GIVEREF(__pyx_tuple__2);
+  __pyx_codeobj__3 = (PyObject*)__Pyx_PyCode_New(1, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__2, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_fpga_interface_pyx, __pyx_n_s_do_pow, 11, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__3)) __PYX_ERR(0, 11, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -2310,16 +2383,28 @@ static int __pyx_pymod_exec_fpga_interface(PyObject *__pyx_pyinit_module)
   if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 2, __pyx_L1_error)
   #endif
 
-  /* "fpga_interface.pyx":7
- * cdef extern int pow_( uint8_t *pin, uint8_t *pout );
+  /* "fpga_interface.pyx":8
+ * cdef extern int init();
+ * 
+ * def init_fpga():             # <<<<<<<<<<<<<<
+ *   return init()
+ * 
+ */
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_14fpga_interface_1init_fpga, NULL, __pyx_n_s_fpga_interface); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 8, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_init_fpga, __pyx_t_1) < 0) __PYX_ERR(0, 8, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "fpga_interface.pyx":11
+ *   return init()
  * 
  * def do_pow(hash):             # <<<<<<<<<<<<<<
  *   hash_b = bytes.fromhex(hash)
  *   cdef array.array a = array.array('B', hash_b)
  */
-  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_14fpga_interface_1do_pow, NULL, __pyx_n_s_fpga_interface); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 7, __pyx_L1_error)
+  __pyx_t_1 = PyCFunction_NewEx(&__pyx_mdef_14fpga_interface_3do_pow, NULL, __pyx_n_s_fpga_interface); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 11, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_do_pow, __pyx_t_1) < 0) __PYX_ERR(0, 7, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_do_pow, __pyx_t_1) < 0) __PYX_ERR(0, 11, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "fpga_interface.pyx":2
@@ -2846,148 +2931,36 @@ bad:
     Py_XDECREF(py_frame);
 }
 
-/* Print */
-#if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION < 3
-static PyObject *__Pyx_GetStdout(void) {
-    PyObject *f = PySys_GetObject((char *)"stdout");
-    if (!f) {
-        PyErr_SetString(PyExc_RuntimeError, "lost sys.stdout");
-    }
-    return f;
-}
-static int __Pyx_Print(PyObject* f, PyObject *arg_tuple, int newline) {
-    int i;
-    if (!f) {
-        if (!(f = __Pyx_GetStdout()))
-            return -1;
-    }
-    Py_INCREF(f);
-    for (i=0; i < PyTuple_GET_SIZE(arg_tuple); i++) {
-        PyObject* v;
-        if (PyFile_SoftSpace(f, 1)) {
-            if (PyFile_WriteString(" ", f) < 0)
-                goto error;
-        }
-        v = PyTuple_GET_ITEM(arg_tuple, i);
-        if (PyFile_WriteObject(v, f, Py_PRINT_RAW) < 0)
-            goto error;
-        if (PyString_Check(v)) {
-            char *s = PyString_AsString(v);
-            Py_ssize_t len = PyString_Size(v);
-            if (len > 0) {
-                switch (s[len-1]) {
-                    case ' ': break;
-                    case '\f': case '\r': case '\n': case '\t': case '\v':
-                        PyFile_SoftSpace(f, 0);
-                        break;
-                    default:  break;
-                }
-            }
-        }
-    }
-    if (newline) {
-        if (PyFile_WriteString("\n", f) < 0)
-            goto error;
-        PyFile_SoftSpace(f, 0);
-    }
-    Py_DECREF(f);
-    return 0;
-error:
-    Py_DECREF(f);
-    return -1;
-}
-#else
-static int __Pyx_Print(PyObject* stream, PyObject *arg_tuple, int newline) {
-    PyObject* kwargs = 0;
-    PyObject* result = 0;
-    PyObject* end_string;
-    if (unlikely(!__pyx_print)) {
-        __pyx_print = PyObject_GetAttr(__pyx_b, __pyx_n_s_print);
-        if (!__pyx_print)
-            return -1;
-    }
-    if (stream) {
-        kwargs = PyDict_New();
-        if (unlikely(!kwargs))
-            return -1;
-        if (unlikely(PyDict_SetItem(kwargs, __pyx_n_s_file, stream) < 0))
-            goto bad;
-        if (!newline) {
-            end_string = PyUnicode_FromStringAndSize(" ", 1);
-            if (unlikely(!end_string))
-                goto bad;
-            if (PyDict_SetItem(kwargs, __pyx_n_s_end, end_string) < 0) {
-                Py_DECREF(end_string);
-                goto bad;
-            }
-            Py_DECREF(end_string);
-        }
-    } else if (!newline) {
-        if (unlikely(!__pyx_print_kwargs)) {
-            __pyx_print_kwargs = PyDict_New();
-            if (unlikely(!__pyx_print_kwargs))
-                return -1;
-            end_string = PyUnicode_FromStringAndSize(" ", 1);
-            if (unlikely(!end_string))
-                return -1;
-            if (PyDict_SetItem(__pyx_print_kwargs, __pyx_n_s_end, end_string) < 0) {
-                Py_DECREF(end_string);
-                return -1;
-            }
-            Py_DECREF(end_string);
-        }
-        kwargs = __pyx_print_kwargs;
-    }
-    result = PyObject_Call(__pyx_print, arg_tuple, kwargs);
-    if (unlikely(kwargs) && (kwargs != __pyx_print_kwargs))
-        Py_DECREF(kwargs);
-    if (!result)
-        return -1;
-    Py_DECREF(result);
-    return 0;
-bad:
-    if (kwargs != __pyx_print_kwargs)
-        Py_XDECREF(kwargs);
-    return -1;
-}
+/* CIntToPy */
+static CYTHON_INLINE PyObject* __Pyx_PyInt_From_int(int value) {
+    const int neg_one = (int) -1, const_zero = (int) 0;
+    const int is_unsigned = neg_one > const_zero;
+    if (is_unsigned) {
+        if (sizeof(int) < sizeof(long)) {
+            return PyInt_FromLong((long) value);
+        } else if (sizeof(int) <= sizeof(unsigned long)) {
+            return PyLong_FromUnsignedLong((unsigned long) value);
+#ifdef HAVE_LONG_LONG
+        } else if (sizeof(int) <= sizeof(unsigned PY_LONG_LONG)) {
+            return PyLong_FromUnsignedLongLong((unsigned PY_LONG_LONG) value);
 #endif
-
-/* PrintOne */
-#if !CYTHON_COMPILING_IN_PYPY && PY_MAJOR_VERSION < 3
-static int __Pyx_PrintOne(PyObject* f, PyObject *o) {
-    if (!f) {
-        if (!(f = __Pyx_GetStdout()))
-            return -1;
-    }
-    Py_INCREF(f);
-    if (PyFile_SoftSpace(f, 0)) {
-        if (PyFile_WriteString(" ", f) < 0)
-            goto error;
-    }
-    if (PyFile_WriteObject(o, f, Py_PRINT_RAW) < 0)
-        goto error;
-    if (PyFile_WriteString("\n", f) < 0)
-        goto error;
-    Py_DECREF(f);
-    return 0;
-error:
-    Py_DECREF(f);
-    return -1;
-    /* the line below is just to avoid C compiler
-     * warnings about unused functions */
-    return __Pyx_Print(f, NULL, 0);
-}
-#else
-static int __Pyx_PrintOne(PyObject* stream, PyObject *o) {
-    int res;
-    PyObject* arg_tuple = PyTuple_Pack(1, o);
-    if (unlikely(!arg_tuple))
-        return -1;
-    res = __Pyx_Print(stream, arg_tuple, 1);
-    Py_DECREF(arg_tuple);
-    return res;
-}
+        }
+    } else {
+        if (sizeof(int) <= sizeof(long)) {
+            return PyInt_FromLong((long) value);
+#ifdef HAVE_LONG_LONG
+        } else if (sizeof(int) <= sizeof(PY_LONG_LONG)) {
+            return PyLong_FromLongLong((PY_LONG_LONG) value);
 #endif
+        }
+    }
+    {
+        int one = 1; int little = (int)*(unsigned char *)&one;
+        unsigned char *bytes = (unsigned char *)&value;
+        return _PyLong_FromByteArray(bytes, sizeof(int),
+                                     little, !is_unsigned);
+    }
+}
 
 /* CIntToPy */
 static CYTHON_INLINE PyObject* __Pyx_PyInt_From_long(long value) {

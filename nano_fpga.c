@@ -78,6 +78,24 @@ uint32_t byte_swap(uint32_t value) {
 
 #define cv32( a )  ( (uint32_t)(*(a)) + (((uint32_t)(*(a+1)))<<8 ) + (((uint32_t)(*(a+2)))<<16 ) + (((uint32_t)(*(a+3)))<<24 )) 
 
+int init() {
+    int slot_id = 0;
+    int rc;
+    uint32_t value = 0xefbeadde;
+
+    printf("===== Initializing FPGA =====\n");
+    /* initialize the fpga_pci library so we could have access to FPGA PCIe from this applications */
+    rc = fpga_pci_init();
+    fail_on(rc, out, "Unable to initialize the fpga_pci library");
+
+    rc = check_afi_ready(slot_id);
+    fail_on(rc, out, "AFI not ready");
+
+    return rc;
+    
+    out:
+        return 1;
+}
 
 #ifdef SV_TEST
 void test_main(uint32_t *exit_code) {
